@@ -1,0 +1,14 @@
+html {
+  background-color: #130025;
+  color: white;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: sans-serif;
+}
+
+svg {
+  overflow: visible;
+  width: 100%;
+  height: 100%;
+}
