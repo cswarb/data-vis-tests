@@ -17,6 +17,8 @@ import D_Chart_YAxis from './d3-style-charts/y-axis';
 import D_Chart_XYAxis from './d3-style-charts/xy-axis';
 import D_Chart_Margins from './d3-style-charts/margins';
 import D_Chart_Task1 from './d3-style-charts/task-1';
+import D_Chart_Weather from './d3-style-charts/weather-data';
+import D_Chart_Time from './d3-style-charts/time';
 
 const App = () => {
     const initData = () => store.dispatch({ type: INIT_DATA });
@@ -45,11 +47,13 @@ const App = () => {
 
           <h2>D3 style charts</h2>
           { /*<D_Chart_1></D_Chart_1> */}
-          <D_Chart_XAxis></D_Chart_XAxis>
+          {/* <D_Chart_XAxis></D_Chart_XAxis>
           <D_Chart_YAxis></D_Chart_YAxis>
-          <D_Chart_XYAxis></D_Chart_XYAxis>
+          <D_Chart_XYAxis></D_Chart_XYAxis>*/}
           <D_Chart_Margins></D_Chart_Margins>
-          <D_Chart_Task1></D_Chart_Task1>
+          {/* <D_Chart_Task1></D_Chart_Task1> */}
+          {/* <D_Chart_Weather></D_Chart_Weather> */}
+          <D_Chart_Time></D_Chart_Time>
 
           <hr />
 
