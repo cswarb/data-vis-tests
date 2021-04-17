@@ -19,6 +19,10 @@ import D_Chart_Margins from './d3-style-charts/margins';
 import D_Chart_Task1 from './d3-style-charts/task-1';
 import D_Chart_Weather from './d3-style-charts/weather-data';
 import D_Chart_Time from './d3-style-charts/time';
+import D_Chart_Paragraph from './d3-style-charts/paragraph';
+import D_Chart_IceElectric from './d3-style-charts/ice-vs-electric';
+import D_Chart_Noom from './d3-style-charts/noom-replicate';
+import D_Chart_Health from './d3-style-charts/health';
 
 const App = () => {
     const initData = () => store.dispatch({ type: INIT_DATA });
@@ -50,10 +54,14 @@ const App = () => {
           {/* <D_Chart_XAxis></D_Chart_XAxis>
           <D_Chart_YAxis></D_Chart_YAxis>
           <D_Chart_XYAxis></D_Chart_XYAxis>*/}
-          <D_Chart_Margins></D_Chart_Margins>
+          {/* <D_Chart_Margins></D_Chart_Margins> */}
           {/* <D_Chart_Task1></D_Chart_Task1> */}
           {/* <D_Chart_Weather></D_Chart_Weather> */}
-          <D_Chart_Time></D_Chart_Time>
+          {/* <D_Chart_Time></D_Chart_Time> */}
+          {/* <D_Chart_Paragraph></D_Chart_Paragraph> */}
+          <D_Chart_IceElectric></D_Chart_IceElectric>
+          <D_Chart_Noom></D_Chart_Noom>
+          <D_Chart_Health></D_Chart_Health>
 
           <hr />
 

@@ -111,7 +111,8 @@ export default () => {
         const lineData = d3.line()
             .x((d: any): any =>  { return xAxis(xAccessor(d)) })
             .y((d: any): any => { return yAxis(yAccessor(d)) })
-            .curve(d3.curveCardinal);
+            // .curve(d3.curveCardinal);
+            .curve(d3.curveStepBefore);
 
         //Line
         dataArea.append('path')
