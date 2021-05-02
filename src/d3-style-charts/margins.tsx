@@ -88,12 +88,12 @@ export default () => {
             <p>Margins example: </p>
 
             <svg ref={ref}>
-                {/* <defs>
+                <defs>
                     <linearGradient x1="0%" y1="50%" x2="90%" y2="75%" id="myGradient" gradientTransform="rotate(90)">
                         <stop offset="50%" stop-color="#e6b551" />
                         <stop offset="100%" stop-opacity="0" />
                     </linearGradient>
-                </defs> */}
+                </defs>
             </svg>
         </React.Fragment>
     )

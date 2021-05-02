@@ -11,8 +11,7 @@ export default () => {
         var parseTime = d3.timeParse('%Y-%m-%d');
 
         const xAccessor = (d: any): any => parseTime(d.date);
-        const yAccessor1 = (d: any) => d.electricSearches;
-        const yAccessor2 = (d: any) => d.iceSearches;
+        const yAccessor1 = (d: any) => d.marketTrend;
 
         //2: Setup boundaries
         const width = 1000;
@@ -55,14 +54,11 @@ export default () => {
         const x = stage.append('g').attr('class', 'x-axis').attr('transform', `translate(0, ${dimensions.boundedHeight})`).call(xAxis);
 
 
-        const ySpreadData = [...dataset.map(yAccessor1), ...dataset.map(yAccessor2)];
+        const ySpreadData = [...dataset.map(yAccessor1)];
         const yExtent = d3.extent(ySpreadData) as any;
         const yScale = d3.scaleLinear().domain(yExtent).range([dimensions.boundedHeight, 0]).nice();
         const yAxis = d3.axisLeft(yScale);
         const y = stage.append('g').attr('class', 'y-axis').call(yAxis);
-
-
-        
 
         // //DYNAMICCLIPPATH
         // dataArea.selectAll('.line-clip').data([dataset]).join((enter) => {
@@ -89,23 +85,6 @@ export default () => {
         //     .attr('clip-path', 'url(#lineClip)')
         // })
 
-        const line2 = d3.line()
-            .x((d: any) => xScale(xAccessor(d)))
-            .y((d: any) => yScale(yAccessor2(d)));
-
-
-        // dataArea.selectAll('.line-2').data([dataset]).join((enter) => {
-        //     return enter.append('path')
-        //         .attr('class', 'line-2')
-        //         .attr('d', (d: any) => line2(d))
-        //         .attr('fill', 'transparent')
-        //         .attr('stroke', 'red')
-        // }, (update) => {
-        //     return update;
-        // }, (exit) => {
-        //     return exit;
-        // });
-
         //grid
         dataArea.selectAll('.grid-line').data(dataset).join((enter) => {
             return enter.append('line')
@@ -122,8 +101,19 @@ export default () => {
             return exit;
         });
 
+        //zero line
+        dataArea.selectAll('.zero-line').data([dataset]).join((enter) => {
+            return enter.append('line')
+                .attr('class', 'zero-line')
+                .attr('stroke', 'white')
+                .attr('x1', '0')
+                .attr('x2', dimensions.boundedWidth)
+                .attr('y1', yScale(0))
+                .attr('y2', yScale(0))
+        })
+
         //generate gradient
-        stage.selectAll('.d').data([dataset]).join((enter) => {
+        stage.selectAll('#myGradient2').data([dataset]).join((enter) => {
             const linearG = enter
                 .append('defs')
                 .append('linearGradient')
@@ -131,8 +121,8 @@ export default () => {
                 .attr('gradientTransform', 'rotate(90)')
                 .attr('x1', '0%')
                 .attr('x2', '100%')
-                .attr('y1', '100%') //must the the same value to fade the graidient at the right point
-                .attr('y2', '100%'); //must the the same value to fade the graidient at the right point
+                .attr('y1', '0') //must the the same value to fade the graidient at the right point
+                .attr('y2', '0'); //must the the same value to fade the graidient at the right point
 
             //top
             linearG.append('stop')
@@ -157,7 +147,7 @@ export default () => {
 
         const area = d3.area()
             .x((d: any) => xScale(xAccessor(d)))
-            .y0((d: any) => yScale(2250))
+            .y0((d: any) => yScale(0))
             .y1((d: any) => yScale(yAccessor1(d)));
 
         dataArea.selectAll('.area').data([dataset]).join((enter) => {
@@ -169,11 +159,9 @@ export default () => {
                 .attr('d', (d) => area(d))
         });
 
-
         const line1 = d3.line()
             .x((d: any) => xScale(xAccessor(d)))
             .y((d: any) => yScale(yAccessor1(d)));
-
 
         dataArea.selectAll('.line-1').data([dataset]).join((enter) => {
             return enter.append('path')
@@ -191,37 +179,37 @@ export default () => {
 
     useEffect(() => {
         const data: any[] = [
-            { date: '2018-06-01', iceSearches: 2350, electricSearches: 1016 },
-            { date: '2018-07-01', iceSearches: 2501, electricSearches: 956 },
-            { date: '2018-08-01', iceSearches: 2445, electricSearches: 1288 },
-            { date: '2018-09-01', iceSearches: 2598, electricSearches: 1014 },
-            { date: '2018-10-01', iceSearches: 3136, electricSearches: 987 },
-            { date: '2018-11-01', iceSearches: 2975, electricSearches: 1367 },
-            { date: '2018-12-01', iceSearches: 2875, electricSearches: 890 },
-            { date: '2019-01-01', iceSearches: 2389, electricSearches: 1378 },
-            { date: '2019-02-01', iceSearches: 2756, electricSearches: 1489 },
-            { date: '2019-03-01', iceSearches: 2570, electricSearches: 1024 },
-            { date: '2019-04-01', iceSearches: 2372, electricSearches: 998 },
-            { date: '2019-05-01', iceSearches: 2641, electricSearches: 1378 },
-            { date: '2019-06-01', iceSearches: 2101, electricSearches: 1598 },
-            { date: '2019-07-01', iceSearches: 1989, electricSearches: 1689 },
-            { date: '2019-08-01', iceSearches: 2401, electricSearches: 1788 },
-            { date: '2019-09-01', iceSearches: 2490, electricSearches: 2400 },
-            { date: '2019-10-01', iceSearches: 1807, electricSearches: 2589 },
-            { date: '2019-11-01', iceSearches: 2010, electricSearches: 2785 },
-            { date: '2019-12-01', iceSearches: 2310, electricSearches: 2893 },
-            { date: '2020-01-01', iceSearches: 1997, electricSearches: 3856 },
-            { date: '2020-02-01', iceSearches: 2187, electricSearches: 3792 },
-            { date: '2020-03-01', iceSearches: 1937, electricSearches: 3101 },
-            { date: '2020-04-01', iceSearches: 2256, electricSearches: 3928 },
-            { date: '2020-05-01', iceSearches: 1912, electricSearches: 3420 },
-            { date: '2020-06-01', iceSearches: 1034, electricSearches: 3465 },
-            { date: '2020-07-01', iceSearches: 1894, electricSearches: 3864 },
-            { date: '2020-08-01', iceSearches: 2081, electricSearches: 3998 },
-            { date: '2020-09-01', iceSearches: 1908, electricSearches: 3678 },
-            { date: '2020-10-01', iceSearches: 1678, electricSearches: 3729 },
-            { date: '2020-11-01', iceSearches: 1863, electricSearches: 4102 },
-            { date: '2020-12-01', iceSearches: 1965, electricSearches: 4289 },
+            { date: '2018-06-01', marketTrend: -235 },
+            { date: '2018-07-01', marketTrend: -251},
+            { date: '2018-08-01', marketTrend: -244 },
+            { date: '2018-09-01', marketTrend: -259 },
+            { date: '2018-10-01', marketTrend: -316},
+            { date: '2018-11-01', marketTrend: -200 },
+            { date: '2018-12-01', marketTrend: -210},
+            { date: '2019-01-01', marketTrend: -150 },
+            { date: '2019-02-01', marketTrend: 10 },
+            { date: '2019-03-01', marketTrend: -89 },
+            { date: '2019-04-01', marketTrend: -101 },
+            { date: '2019-05-01', marketTrend: -30 },
+            { date: '2019-06-01', marketTrend: 50 },
+            { date: '2019-07-01', marketTrend: 134 },
+            { date: '2019-08-01', marketTrend: 76 },
+            { date: '2019-09-01', marketTrend: 192 },
+            { date: '2019-10-01', marketTrend: 298 },
+            { date: '2019-11-01', marketTrend: 128 },
+            { date: '2019-12-01', marketTrend: 32 },
+            { date: '2020-01-01', marketTrend: 103 },
+            { date: '2020-02-01', marketTrend: 264 },
+            { date: '2020-03-01', marketTrend: 376 },
+            { date: '2020-04-01', marketTrend: 287 },
+            { date: '2020-05-01', marketTrend: 201 },
+            { date: '2020-06-01', marketTrend: 345 },
+            { date: '2020-07-01', marketTrend: 278 },
+            { date: '2020-08-01', marketTrend: 298 },
+            { date: '2020-09-01', marketTrend: 341 },
+            { date: '2020-10-01', marketTrend: 312 },
+            { date: '2020-11-01', marketTrend: 351 },
+            { date: '2020-12-01', marketTrend: 320 },
         ];
         cb(data);
     });

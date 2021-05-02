@@ -23,6 +23,14 @@ import D_Chart_Paragraph from './d3-style-charts/paragraph';
 import D_Chart_IceElectric from './d3-style-charts/ice-vs-electric';
 import D_Chart_Noom from './d3-style-charts/noom-replicate';
 import D_Chart_Health from './d3-style-charts/health';
+import D_Chart_Line_Area from './d3-style-charts/line-area';
+import D_Chart_Bar_Test from './d3-style-charts/bar-test';
+import D_Chart_Stacked_Bar from './d3-style-charts/stacked-bar';
+import D_Chart_Stacked_Bar_Percentage from './d3-style-charts/stacked-bar-percentage';
+import D_Chart_Zoom from './d3-style-charts/zoom';
+import D_Chart_Brush from './d3-style-charts/brush';
+import D_Chart_Radar from './d3-style-charts/radar';
+import D_Chart_HeatMap from './d3-style-charts/heat-map';
 
 const App = () => {
     const initData = () => store.dispatch({ type: INIT_DATA });
@@ -59,9 +67,18 @@ const App = () => {
           {/* <D_Chart_Weather></D_Chart_Weather> */}
           {/* <D_Chart_Time></D_Chart_Time> */}
           {/* <D_Chart_Paragraph></D_Chart_Paragraph> */}
-          <D_Chart_IceElectric></D_Chart_IceElectric>
-          <D_Chart_Noom></D_Chart_Noom>
-          <D_Chart_Health></D_Chart_Health>
+          {/* <D_Chart_IceElectric></D_Chart_IceElectric> */}
+          {/* <D_Chart_Noom></D_Chart_Noom> */}
+          {/* <D_Chart_Health></D_Chart_Health> */}
+          {/* <D_Chart_Line_Area></D_Chart_Line_Area> */}
+          {/* <D_Chart_Bar_Test></D_Chart_Bar_Test> */}
+          <D_Chart_Stacked_Bar></D_Chart_Stacked_Bar>
+          <D_Chart_Stacked_Bar_Percentage></D_Chart_Stacked_Bar_Percentage>
+          
+          <D_Chart_Zoom></D_Chart_Zoom>
+          {/* <D_Chart_Brush></D_Chart_Brush> */}
+          {/* <D_Chart_Radar></D_Chart_Radar> */}
+          {/* <D_Chart_HeatMap></D_Chart_HeatMap> */}
 
           <hr />
 
